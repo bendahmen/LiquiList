@@ -2,4 +2,4 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse('Welcome to LiquiList!')
+    return render(request, 'home.html')
