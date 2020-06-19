@@ -9,158 +9,47 @@
 
 {% block main %}
     <div class="cwView">
-        <div class="kw1">
-            <div class="card">
-                <h5 class="card-header text-center">KW 10</h5>
-                <div class="card-body">
-                    <h6 class="card-title">Eingänge</h6>
-                </div>
-                <ul class="list-group list-group-flush">
-                    {% for receivable in receivables %}
-                    <li class="list-group-item zahlung payment-receivable">
-                        <div class="payment-content">
-                            <div class="typ">Zahlung</div>
-                            <div class="kunde">{{ receivable.customer }}</div>
-                            <div class="kwSelektor">
-                                <form action="#" method="POST">
-                                    <div class="form-group formKwSelektor">
-                                        <select class="form-control form-control-sm" id="kwxxSelektor">
-                                            <option value="10">KW 10</option>
-                                            <option value="11">KW 11</option>
-                                        </select>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">KW ändern</button>
-                                </form>
+        {% for cw, cwContent in cWeeks.items %}
+            <div class="kw1">
+                <div class="card">
+                    <h5 class="card-header text-center">KW {{ cw }}</h5>
+                    {% for paymentType, ptContent in cwContent.items %}
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            {% if paymentType == 'receivables' %}
+                            Eingang
+                            {% elif paymentType == 'payables' %}
+                            Ausgang
+                            {% endif %}
+                        </h6>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for receivable in ptContent %}
+                        <li class="list-group-item zahlung payment-receivable">
+                            <div class="payment-content">
+                                <div class="typ">Zahlung</div>
+                                <div class="kunde">{{ receivable.customer }}</div>
+                                <div class="kwSelektor">
+                                    <form action="#" method="POST">
+                                        <div class="form-group formKwSelektor">
+                                            <select class="form-control form-control-sm" id="kwxxSelektor">
+                                                <option value="10">KW 10</option>
+                                                <option value="11">KW 11</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">KW ändern</button>
+                                    </form>
+                                </div>
+                                <div class="betrag">{{ receivable.amount }}</div>
+                                <div class="bank">{{ receivable.account }}</div>
                             </div>
-                            <div class="betrag">{{ receivable.amount }}</div>
-                            <div class="bank">{{ receivable.account }}</div>
-                        </div>
-                    </li>
+                        </li>
+                        {% endfor %}
+                    </ul>
                     {% endfor %}
-                </ul>
-                <div class="card-body">
-                    <h6 class="card-title">Ausgänge</h6>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Zahlung 1</li>
-                    <li class="list-group-item">Zahlung 2</li>
-                </ul>
             </div>
-        </div>
-        <div class="kw2">
-            <div class="card">
-                <h5 class="card-header text-center">KW 10</h5>
-                <div class="card-body">
-                    <h6 class="card-title">Eingänge</h6>
-                </div>
-                <ul class="list-group list-group-flush">
-                    {% for receivable in receivables %}
-                    <li class="list-group-item zahlung payment-receivable">
-                        <div class="payment-content">
-                            <div class="typ">Zahlung</div>
-                            <div class="kunde">{{ receivable.customer }}</div>
-                            <div class="kwSelektor">
-                                <form action="#" method="POST">
-                                    <div class="form-group formKwSelektor">
-                                        <select class="form-control form-control-sm" id="kwxxSelektor">
-                                            <option value="10">KW 10</option>
-                                            <option value="11">KW 11</option>
-                                        </select>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">KW ändern</button>
-                                </form>
-                            </div>
-                            <div class="betrag">{{ receivable.amount }}</div>
-                            <div class="bank">{{ receivable.account }}</div>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
-                <div class="card-body">
-                    <h6 class="card-title">Ausgänge</h6>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Zahlung 1</li>
-                    <li class="list-group-item">Zahlung 2</li>
-                </ul>
-            </div>
-        </div>
-        <div class="kw3">
-            <div class="card">
-                <h5 class="card-header text-center">KW 10</h5>
-                <div class="card-body">
-                    <h6 class="card-title">Eingänge</h6>
-                </div>
-                <ul class="list-group list-group-flush">
-                    {% for receivable in receivables %}
-                    <li class="list-group-item zahlung payment-receivable">
-                        <div class="payment-content">
-                            <div class="typ">Zahlung</div>
-                            <div class="kunde">{{ receivable.customer }}</div>
-                            <div class="kwSelektor">
-                                <form action="#" method="POST">
-                                    <div class="form-group formKwSelektor">
-                                        <select class="form-control form-control-sm" id="kwxxSelektor">
-                                            <option value="10">KW 10</option>
-                                            <option value="11">KW 11</option>
-                                        </select>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">KW ändern</button>
-                                </form>
-                            </div>
-                            <div class="betrag">{{ receivable.amount }}</div>
-                            <div class="bank">{{ receivable.account }}</div>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
-                <div class="card-body">
-                    <h6 class="card-title">Ausgänge</h6>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Zahlung 1</li>
-                    <li class="list-group-item">Zahlung 2</li>
-                </ul>
-            </div>
-        </div>
-        <div class="kw4">
-            <div class="card">
-                <h5 class="card-header text-center">KW 10</h5>
-                <div class="card-body">
-                    <h6 class="card-title">Eingänge</h6>
-                </div>
-                <ul class="list-group list-group-flush">
-                    {% for receivable in receivables %}
-                    <li class="list-group-item zahlung payment-receivable">
-                        <div class="payment-content">
-                            <div class="typ">Zahlung</div>
-                            <div class="kunde">{{ receivable.customer }}</div>
-                            <div class="kwSelektor">
-                                <form action="#" method="POST">
-                                    <div class="form-group formKwSelektor">
-                                        <select class="form-control form-control-sm" id="kwxxSelektor">
-                                            <option value="10">KW 10</option>
-                                            <option value="11">KW 11</option>
-                                        </select>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">KW ändern</button>
-                                </form>
-                            </div>
-                            <div class="betrag">{{ receivable.amount }}</div>
-                            <div class="bank">{{ receivable.account }}</div>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
-                <div class="card-body">
-                    <h6 class="card-title">Ausgänge</h6>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Zahlung 1</li>
-                    <li class="list-group-item">Zahlung 2</li>
-                </ul>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 {% endblock %}
     
