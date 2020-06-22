@@ -1,12 +1,17 @@
 .cwView {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    column-gap: 1em;
+    column-gap: 0.5em;
 }
 
 .payment-receivable {
     background-color: green;
     border: rgb(27, 78, 49) solid;
+}
+
+.payment-payable {
+    background-color: red;
+    border: rgb(117, 29, 29) solid;
 }
 
 .payment-content {

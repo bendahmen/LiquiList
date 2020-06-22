@@ -25,17 +25,20 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         {% for receivable in ptContent %}
-                        <li class="list-group-item zahlung payment-receivable">
+                        <li class="list-group-item zahlung payment-{% if paymentType == 'receivables' %}receivable{% elif paymentType == 'payables' %}payable{% endif %}">
                             <div class="payment-content">
                                 <div class="typ">Zahlung</div>
                                 <div class="kunde">{{ receivable.customer }}</div>
                                 <div class="kwSelektor">
-                                    <form action="#" method="POST">
+                                    <form method="POST">
+                                        {% csrf_token %}
                                         <div class="form-group formKwSelektor">
-                                            <select class="form-control form-control-sm" id="kwxxSelektor">
-                                                <option value="10">KW 10</option>
-                                                <option value="11">KW 11</option>
+                                            <select class="form-control form-control-sm" id="cwxxSelector" name="cwxxSelector">
+                                                <option value="1">KW 1</option>
+                                                <option value="2">KW 2</option>
                                             </select>
+                                            <input type="hidden" name="paymentID" class="form-control" value="{{ receivable.id }}">
+                                            <input type="hidden" name="paymentTypeForm" class="form-control" value="{{ paymentType }}">
                                         </div>
                                         <button type="submit" class="btn btn-primary">KW ändern</button>
                                     </form>
@@ -47,9 +50,15 @@
                         {% endfor %}
                     </ul>
                     {% endfor %}
+                    <div class="card-footer">
+                        <ul class="list-group list-group-flush">
+                            {% for account in accounts %}
+                                Saldo bei der {{ account.name }}: {{ account.balance }}
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         {% endfor %}
     </div>
 {% endblock %}
-    
